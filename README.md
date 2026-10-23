@@ -1,9 +1,17 @@
 # Torrenta website
 
 The marketing + documentation site for [Torrenta](https://github.com/adriandeleon/torrenta), a
-keyboard-first, cross-platform BitTorrent client. Meant to live at
-**[torrenta-project.dev](https://torrenta-project.dev)** (the host is `src/lib/site.ts` and
-`public/CNAME`; change both together).
+keyboard-first, cross-platform BitTorrent client. Live at
+**[adriandeleon.github.io/torrenta-website](https://adriandeleon.github.io/torrenta-website/)**
+until the torrenta-project.dev domain is bought.
+
+Because GitHub Pages serves a project site under `/torrenta-website/`, the site has an Astro
+`base` (`src/lib/site.ts`). Templates build every internal link and asset with `href()` from that
+file; Markdown is written with plain root-relative links (`/docs/search`) and a rehype plugin in
+`astro.config.mjs` puts them under the base. A bare `href="/…"` in a template is a broken link.
+Moving to the domain: `site` to the domain and `base` to `"/"` in `src/lib/site.ts`, the host in
+a new `public/CNAME` and in `public/robots.txt` and the social cards (`scripts/gen-images.mjs`,
+then `--force`), and the custom domain under the repository's Settings → Pages.
 
 Built with [Astro](https://astro.build) and deployed to GitHub Pages via
 `.github/workflows/pages.yml` on every push to `master`. The stack, the layout and the look are
@@ -17,7 +25,7 @@ Torrenta is built with the help of AI coding tools.
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
+npm run dev       # http://localhost:4321/torrenta-website/
 npm run build     # production build to dist/
 npm run preview   # serve the build (site search only works here, after a build)
 ```

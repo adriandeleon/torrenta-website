@@ -1,4 +1,5 @@
 ---
+import { href } from "../lib/site";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 
@@ -6,7 +7,7 @@ interface Props {
   entry: CollectionEntry<"docs">;
 }
 const { entry } = Astro.props;
-const base = "/docs";
+const base = href("/docs");
 
 // Build the ordered sidebar: categories in a fixed order, docs by `order`.
 const CATEGORY_ORDER = [
@@ -28,7 +29,7 @@ const cats = [...new Set([...CATEGORY_ORDER, ...pages.map((p) => p.data.category
 );
 
 type Page = (typeof pages)[number];
-const href = (p: Page) => (p.id === "introduction" ? base : `${base}/${p.id}`);
+const pageHref = (p: Page) => (p.id === "introduction" ? base : `${base}/${p.id}`);
 
 // Flat order for prev/next.
 const flat = cats.flatMap((c) => pages.filter((p) => p.data.category === c));
@@ -37,7 +38,7 @@ const prev = idx > 0 ? flat[idx - 1] : null;
 const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
 
 const reference = [
-  { href: "/keybindings", label: "Keybindings" },
+  { href: href("/keybindings"), label: "Keybindings" },
   { href: "https://github.com/adriandeleon/torrenta/blob/master/docs/ROADMAP.md", label: "Roadmap" },
   { href: "https://github.com/adriandeleon/torrenta/blob/master/CHANGELOG.md", label: "Changelog" },
 ];
@@ -105,7 +106,7 @@ const faqJsonLd =
               {pages
                 .filter((p) => p.data.category === c)
                 .map((p) => (
-                  <a href={href(p)} class={p.id === entry.id ? "active" : ""}>
+                  <a href={pageHref(p)} class={p.id === entry.id ? "active" : ""}>
                     {p.data.beta && <span class="beta-pill">Beta</span>}
                     {p.data.title}
                   </a>
@@ -130,7 +131,7 @@ const faqJsonLd =
       <nav class="docs-pager" data-pagefind-ignore>
         {
           prev ? (
-            <a class="prev" href={href(prev)}>
+            <a class="prev" href={pageHref(prev)}>
               <span>← Previous</span>
               {prev.data.title}
             </a>
@@ -140,7 +141,7 @@ const faqJsonLd =
         }
         {
           next && (
-            <a class="next" href={href(next)}>
+            <a class="next" href={pageHref(next)}>
               <span>Next →</span>
               {next.data.title}
             </a>

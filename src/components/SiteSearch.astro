@@ -60,7 +60,7 @@ const pagefindPath = `${base}/pagefind/pagefind.js`.replace(/\/{2,}/g, "/");
   </div>
 </div>
 
-<script is:inline define:vars={{ pagefindPath }}>
+<script is:inline define:vars={{ pagefindPath, base }}>
   (function () {
     const openBtn = document.getElementById("search-open");
     const modal = document.getElementById("search-modal");
@@ -95,7 +95,8 @@ const pagefindPath = `${base}/pagefind/pagefind.js`.replace(/\/{2,}/g, "/");
       try {
         pf = await import(pagefindPath);
         if (pf.options) {
-          await pf.options({ excerptLength: 22 });
+          // Results are indexed relative to dist/, so they need the base the site is served under.
+          await pf.options({ excerptLength: 22, baseUrl: `${base}/`.replace(/\/{2,}/g, "/") });
         }
         pfState = "ready";
       } catch (e) {

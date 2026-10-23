@@ -1,4 +1,5 @@
 ---
+import { href } from "../../lib/site";
 import { getCollection, render } from "astro:content";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
@@ -35,7 +36,7 @@ const related = (group?.items ?? []).filter((f) => f.id !== entry.id).slice(0, 6
   ogImage="og/features.png"
 >
   <main class="doc feature" data-pagefind-body data-pagefind-meta="kind:Feature">
-    <p class="back"><a href="/#features">← All features</a></p>
+    <p class="back"><a href={href("/#features")}>← All features</a></p>
     <h1>
       {entry.data.title}
       {entry.data.beta && <span class="beta-pill">Beta</span>}
@@ -45,7 +46,7 @@ const related = (group?.items ?? []).filter((f) => f.id !== entry.id).slice(0, 6
     {
       shot ? (
         <figure class="shot">
-          <img src={`/${shot}`} alt={`${entry.data.title} in Torrenta`} />
+          <img src={href(shot)} alt={`${entry.data.title} in Torrenta`} />
         </figure>
       ) : (
         <div class="shot-placeholder" aria-hidden="true">
@@ -63,7 +64,7 @@ const related = (group?.items ?? []).filter((f) => f.id !== entry.id).slice(0, 6
           <ul>
             {related.map((f) => (
               <li>
-                <a href={`/features/${f.id}`}>{f.data.title}</a>
+                <a href={href(`/features/${f.id}`)}>{f.data.title}</a>
                 {f.data.beta && <span class="beta-pill">Beta</span>}
               </li>
             ))}

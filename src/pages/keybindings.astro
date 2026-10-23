@@ -1,4 +1,5 @@
 ---
+import { href } from "../lib/site";
 import Layout from "../layouts/Layout.astro";
 import { commandGroups } from "../lib/commands";
 import { chordText } from "../lib/keys";
@@ -75,7 +76,7 @@ const bound = groups.reduce((n, g) => n + g.commands.filter((c) => c.keys.length
       and <kbd>Esc</kbd> cancels; in its file tree <kbd>Space</kbd> ticks,
       <kbd>+</kbd> and <kbd>−</kbd> change the priority. In the RSS tab
       <kbd>N</kbd> adds a feed, <kbd>M</kbd> toggles read and <kbd>F5</kbd>
-      refreshes. See <a href="/docs/keyboard">the keyboard guide</a> for the keys
+      refreshes. See <a href={href("/docs/keyboard")}>the keyboard guide</a> for the keys
       inside each part of the window.
     </p>
   </main>

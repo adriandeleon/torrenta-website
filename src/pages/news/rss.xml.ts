@@ -1,6 +1,7 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import type { APIContext } from "astro";
+import { href, site } from "../../lib/site";
 
 // Newest first. Several items can share a calendar day and dates are date-only,
 // so ties are broken by release version (higher first, a versioned item ahead of
@@ -26,12 +27,12 @@ export async function GET(context: APIContext) {
   return rss({
     title: "Torrenta News",
     description: "Release announcements and updates from the Torrenta project.",
-    site: context.site ?? "https://torrenta-project.dev",
+    site: new URL(href("/"), context.site ?? site).href,
     items: items.map((p) => ({
       title: p.data.title,
       description: p.data.description ?? "",
       pubDate: p.data.date,
-      link: `/news/${p.id}/`,
+      link: href(`/news/${p.id}/`),
     })),
   });
 }

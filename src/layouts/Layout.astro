@@ -1,6 +1,6 @@
 ---
 import { version, repo } from "../lib/torrenta";
-import { site } from "../lib/site";
+import { site, href } from "../lib/site";
 import SiteSearch from "../components/SiteSearch.astro";
 
 interface Props {
@@ -33,7 +33,7 @@ const url = (p: string) => `${base}/${p}`.replace(/\/{2,}/g, "/");
 // unconditional.
 const withSlash = (p: string) => (p.endsWith("/") ? p : `${p}/`);
 const canonical = new URL(withSlash(canonicalPath ?? Astro.url.pathname), Astro.site).href;
-const ogImageUrl = new URL(ogImage ?? "/og-image.png", Astro.site).href;
+const ogImageUrl = new URL(href(ogImage ?? "og-image.png"), Astro.site).href;
 
 const nav = [
   { href: url("#features"), label: "Features" },
@@ -84,7 +84,7 @@ const jsonLd = {
   operatingSystem: "macOS, Windows, Linux",
   softwareVersion: version,
   description,
-  url: site,
+  url: new URL(href("/"), site).href,
   license: `${repo}/blob/master/LICENSE`,
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };

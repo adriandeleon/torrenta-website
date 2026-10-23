@@ -1,4 +1,5 @@
 ---
+import { href } from "../lib/site";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import Layout from "../layouts/Layout.astro";
@@ -34,7 +35,7 @@ const featureShot = (id: string) => {
 // tie-break on version (newest release first), then on the link.
 const newsItems = (await getCollection("news")).map((e) => ({
   kind: "News",
-  href: `/news/${e.id}`,
+  href: href(`/news/${e.id}`),
   title: e.data.title,
   description: e.data.description,
   date: e.data.date,
@@ -43,7 +44,7 @@ const newsItems = (await getCollection("news")).map((e) => ({
 }));
 const blogItems = (await getCollection("blog")).map((e) => ({
   kind: "Blog",
-  href: `/blog/${e.id}`,
+  href: href(`/blog/${e.id}`),
   title: e.data.title,
   description: e.data.description,
   date: e.data.date,
@@ -233,7 +234,7 @@ const platforms = [
         process, with v2 and hybrid torrents, uTP, DHT, PEX and encryption. Or it
         drives a <code>transmission-daemon</code> on a seedbox or a NAS over its
         RPC, from the same window: what the daemon cannot do is hidden, never
-        greyed out or faked. <a href="/docs/remote">Read how</a>.
+        greyed out or faked. <a href={href("/docs/remote")}>Read how</a>.
       </p>
 
       <p class="why-cta">
@@ -248,7 +249,7 @@ const platforms = [
           <div class="latest-head">
             <h2>From the blog &amp; news</h2>
             <span class="latest-links">
-              <a href="/news">All news</a> · <a href="/blog">All posts</a>
+              <a href={href("/news")}>All news</a> · <a href={href("/blog")}>All posts</a>
             </span>
           </div>
           <div class="latest-grid">
@@ -303,7 +304,7 @@ const platforms = [
               {g.items.map((f) => {
                 const shot = featureShot(f.id);
                 return (
-                  <a class="card" href={`/features/${f.id}`}>
+                  <a class="card" href={href(`/features/${f.id}`)}>
                     {shot ? (
                       <span class="card-shot">
                         <img src={shot} alt="" loading="lazy" decoding="async" width="560" height="315" />
@@ -387,7 +388,7 @@ const platforms = [
           ))
         }
       </ul>
-      <p class="keys-more"><a href="/keybindings">All {commandCount} commands and their keys &rarr;</a></p>
+      <p class="keys-more"><a href={href("/keybindings")}>All {commandCount} commands and their keys &rarr;</a></p>
     </section>
 
     <section id="download" class="section">
