@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://torrenta-project.dev/sitemap-index.xml

@@ -1,0 +1,164 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { commandGroups } from "../lib/commands";
+import { chordText } from "../lib/keys";
+
+// Every command the app registers, grouped as the menus are, with its keys. Generated from the
+// app's own command list (scripts/GenCommands.java), so it cannot drift from the menus.
+const groups = commandGroups.map((g) => ({
+  title: g.title,
+  commands: g.commands.map((c) => ({
+    title: c.title,
+    id: c.id,
+    keys: c.keys.map((k) => ({ pc: chordText(k), mac: chordText(k, true) })),
+  })),
+}));
+const total = groups.reduce((n, g) => n + g.commands.length, 0);
+const bound = groups.reduce((n, g) => n + g.commands.filter((c) => c.keys.length).length, 0);
+---
+
+<Layout
+  title="Keybindings — Torrenta"
+  description="Every Torrenta command with its keys: adding torrents, the selection, the queue, categories and tags, views, the window, logs and the application."
+  ogImage="og/keybindings.png"
+>
+  <main class="page" data-pagefind-body data-pagefind-meta="kind:Reference">
+    <h1>Keybindings</h1>
+    <p class="lead">
+      All {total} commands, {bound} of them with a key. Every one is in the
+      <strong>command palette</strong> (<kbd data-mac="⌥X">Alt+X</kbd>, or
+      <kbd data-mac="⌘⇧P">Ctrl+Shift+P</kbd> if you choose it under
+      <strong>Settings → General → Keyboard</strong>), and every action on
+      torrents is in the Torrent menu and the list's context menu too, applying to
+      the whole selection.
+    </p>
+
+    <div class="legend">
+      <span>On macOS <kbd>Ctrl</kbd> is <kbd>⌘</kbd>, and this page shows the Mac keys there</span>
+      <span><kbd>Ctrl+Tab</kbd> is Control on every platform</span>
+      <span><kbd>Space</kbd>, <kbd>Delete</kbd> and <kbd>F2</kbd> act on the list, never in a text field</span>
+    </div>
+
+    <div class="columns">
+      {
+        groups.map((g) => (
+          <section class="group">
+            <h2>{g.title}</h2>
+            <table>
+              <tbody>
+                {g.commands.map((c) => (
+                  <tr id={c.id}>
+                    <td class="title">{c.title}</td>
+                    <td class="keys">
+                      {c.keys.length === 0 ? (
+                        <span class="none">palette</span>
+                      ) : (
+                        c.keys.map((k, i) => (
+                          <>
+                            {i > 0 && <span class="or">or</span>}
+                            <kbd data-mac={k.mac}>{k.pc}</kbd>
+                          </>
+                        ))
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        ))
+      }
+    </div>
+
+    <p class="note">
+      In the Add dialog <kbd>Enter</kbd> adds, <kbd>Shift+Enter</kbd> adds paused
+      and <kbd>Esc</kbd> cancels; in its file tree <kbd>Space</kbd> ticks,
+      <kbd>+</kbd> and <kbd>−</kbd> change the priority. In the RSS tab
+      <kbd>N</kbd> adds a feed, <kbd>M</kbd> toggles read and <kbd>F5</kbd>
+      refreshes. See <a href="/docs/keyboard">the keyboard guide</a> for the keys
+      inside each part of the window.
+    </p>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 3rem 1.25rem 2rem;
+  }
+  h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .lead {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 0 0 1.5rem;
+    max-width: 48rem;
+  }
+  .lead strong {
+    color: var(--text);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    color: var(--faint);
+    font-size: 0.85rem;
+    margin: 0 0 2rem;
+  }
+  .columns {
+    columns: 2 26rem;
+    column-gap: 2.5rem;
+  }
+  .group {
+    break-inside: avoid;
+    margin: 0 0 2rem;
+  }
+  .group h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+    margin: 0 0 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+  }
+  td {
+    padding: 0.42rem 0;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: top;
+  }
+  tr:target td {
+    background: var(--accent-soft);
+  }
+  .title {
+    color: var(--text);
+    padding-right: 1rem;
+  }
+  .keys {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .or {
+    color: var(--faint);
+    font-size: 0.8rem;
+    margin: 0 0.35rem;
+  }
+  .none {
+    color: var(--faint);
+    font-size: 0.8rem;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 48rem;
+  }
+</style>
