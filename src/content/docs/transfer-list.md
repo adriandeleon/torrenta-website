@@ -63,6 +63,7 @@ type the space after it:
 | `tracker:host` | part of any tracker's host |
 | `hash:7a3f` | the start of the info-hash |
 | `is:sequential` | torrents downloading in order |
+| `is:link` / `is:torrent` | downloads from links, or torrents |
 | `ratio<1` | ratio compared with `<`, `<=`, `>`, `>=`, `=` |
 | `size>4g` | size, with `k`, `m`, `g` or `t` |
 | `added<7d` | added within the last seven days (`h`, `d`, `w`) |
@@ -73,7 +74,8 @@ empty box hands the last chip back for editing, and a click on a chip removes it
 
 **Run a command.** Type `>` and a name: the palette opens with what you typed.
 
-**Add.** Paste a magnet, a link to a `.torrent` or a path to one, and the Add dialog opens.
+**Add.** Paste a magnet, a link to a `.torrent` or a path to one, and the Add dialog opens. A
+link to any other file opens Download Link (see [Adding torrents](/docs/adding-torrents#links-that-are-not-torrents)).
 
 `Enter` selects every match and returns to the list, so the next key acts on all of them. `Esc`
 peels one layer at a time: the box, then the list's filter, then the selection.
@@ -83,7 +85,7 @@ peels one layer at a time: the box, then the list's filter, then the selection.
 The sidebar has **All**, then four sections, each entry with a live count:
 
 - **Status**: Downloading, Seeding, Completed, Paused, Active (moving now), Inactive, Stalled,
-  Checking, Errored.
+  Checking, Errored, and From links (downloads that are not torrents).
 - **Categories**, plus Uncategorised.
 - **Tags**, plus Untagged.
 - **Trackers**: one entry per tracker host, plus Trackerless, and Tracker error while a tracker
@@ -94,11 +96,15 @@ palette has a **Show: …** command for each status.
 
 From the keyboard: `Ctrl+B` focuses the sidebar; the arrows walk every section, `Space` makes an
 entry its section's choice, `Enter` chooses and returns to the list, `Esc` returns without
-choosing, and `Left`/`Right` fold a section. `Ctrl+Shift+B` shows or hides it.
+choosing, and `Left`/`Right` fold a section. With the mouse, a click on a section's heading folds
+or opens it; a chevron at its right edge says which. `Ctrl+Shift+B` shows or hides it.
+
+Drag the sidebar's edge that faces the list to make it wider or narrower (150 to 480 px); a
+double-click on the edge goes back to the default.
 
 The sidebar sits on the left or the right, or is hidden: **View → Sidebar on the Right**, the
 palette's **Move Sidebar to the Other Side**, or **Settings → General → Appearance → Sidebar**.
-The choices, the folded sections and whether it shows are remembered.
+The choices, the folded sections, the width and whether it shows are remembered.
 
 ## The view strip
 

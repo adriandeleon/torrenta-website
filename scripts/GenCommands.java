@@ -1,6 +1,7 @@
 // Generates src/lib/commands.ts (the Keybindings page, the palette demo) and src/lib/version.ts
 // from a Torrenta checkout: the Command records in MainWindow.buildCommands(), their labels in
-// messages.properties, the scene accelerators beside them, and the pom's version.
+// messages.properties, their chords in ui.Chords, the scene accelerators beside them, and the pom's
+// version.
 //
 //   java scripts/GenCommands.java [/path/to/torrenta]
 //
@@ -87,6 +88,8 @@ void main(String[] args) throws IOException {
     try (Reader r = Files.newBufferedReader(catalogue, StandardCharsets.UTF_8)) {
         messages.load(r);
     }
+    Path chords = window.resolveSibling("Chords.java");
+    if (Files.exists(chords)) CHORDS.putAll(chordTable(Files.readString(chords)));
 
     String source = Files.readString(window);
     int start = source.indexOf("private List<Command> buildCommands()");
@@ -232,6 +235,36 @@ static List<String> arguments(String s, int from) {
 static final Pattern TR = Pattern.compile("tr\\(\"([^\"]+)\"(?:,\\s*([^)]+))?\\)");
 static final Pattern CHORD = Pattern.compile("(chord|shiftChord)\\(KeyCode\\.(\\w+)\\)");
 static final Pattern CYCLE = Pattern.compile("cycleChord\\((true|false)\\)");
+static final Pattern CHORDS_OF = Pattern.compile("Chords\\.of\\(\"([^\"]+)\"\\)");
+
+// ui.Chords, by name: every chord the window binds, in one table since Torrenta 0.2.0.
+static final Map<String, List<String>> CHORDS = new LinkedHashMap<>();
+
+/** The {@code t.put(name, …)} lines of Chords.java as keys: chord, shiftChord or a KeyCodeCombination. */
+static Map<String, List<String>> chordTable(String source) {
+    Map<String, List<String>> table = new LinkedHashMap<>();
+    Matcher m = Pattern.compile("t\\.put\\(\\s*\"([^\"]+)\",\\s*(chord|shiftChord)\\(KeyCode\\.(\\w+)\\)\\)")
+            .matcher(source);
+    while (m.find()) {
+        List<String> keys = new ArrayList<>(List.of("Shortcut"));
+        if (m.group(2).equals("shiftChord")) keys.add("Shift");
+        keys.add(keyName(m.group(3)));
+        table.put(m.group(1), keys);
+    }
+    m = Pattern.compile("t\\.put\\(\\s*\"([^\"]+)\",\\s*new KeyCodeCombination\\(KeyCode\\.(\\w+)((?:\\s*,\\s*KeyCombination\\.\\w+)*)\\)\\)")
+            .matcher(source);
+    while (m.find()) {
+        List<String> keys = new ArrayList<>();
+        String mods = m.group(3);
+        if (mods.contains("SHORTCUT_DOWN")) keys.add("Shortcut");
+        if (mods.contains("CONTROL_DOWN")) keys.add("Ctrl");
+        if (mods.contains("ALT_DOWN")) keys.add("Alt");
+        if (mods.contains("SHIFT_DOWN")) keys.add("Shift");
+        keys.add(keyName(m.group(2)));
+        table.put(m.group(1), keys);
+    }
+    return table;
+}
 
 static String label(String expr, Properties messages) {
     Matcher m = TR.matcher(expr);
@@ -250,6 +283,12 @@ static List<String> chord(String expr, Properties messages) {
         List<String> keys = new ArrayList<>(List.of("Shortcut"));
         if (m.group(1).equals("shiftChord")) keys.add("Shift");
         keys.add(keyName(m.group(2)));
+        return keys;
+    }
+    m = CHORDS_OF.matcher(expr);
+    if (m.find()) {
+        List<String> keys = CHORDS.get(m.group(1));
+        if (keys == null) throw new IllegalStateException("no chord named " + m.group(1) + " in ui.Chords");
         return keys;
     }
     m = CYCLE.matcher(expr);

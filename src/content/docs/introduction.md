@@ -14,7 +14,7 @@ Java runtime, so there is nothing else to install. Under the window is
 [libtorrent](https://www.libtorrent.org) 2.x, the engine behind qBittorrent and Deluge, or, if
 you prefer, a `transmission-daemon` on a seedbox or a NAS.
 
-Version 0.1.0, released on 2026-10-22, is the first release. Downloads are on the
+Version 0.2.0, released on 2026-10-24, is the latest release. Downloads are on the
 [releases page](https://github.com/adriandeleon/torrenta/releases).
 
 ## What is in it
@@ -25,6 +25,7 @@ Version 0.1.0, released on 2026-10-22, is the first release. Downloads are on th
 - **Many ways in.** `.torrent` files, magnet links, links to `.torrent` files, drag and drop, the
   clipboard, the command line, a double-clicked file or a browser's magnet link, and watched
   folders. All of them go through one Add dialog with a file tree, priorities and free space.
+  A link to any other file is downloaded too, by curl, in the same list.
 - **The omnibox.** One box filters the list (`state:seeding size>4g -tag:keep`), runs a command
   after `>`, or adds whatever you paste.
 - **Organisation.** Categories with their own save paths, tags, queue order, per-torrent limits,

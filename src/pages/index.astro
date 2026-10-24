@@ -85,7 +85,7 @@ const keyRows = keyIds.flatMap((id) => {
 });
 
 // Against the two clients Torrenta set out to replace, from the parity matrix in the app's
-// docs/ROADMAP.md (Transmission 4.1, qBittorrent 5). Only rows Torrenta 0.1.0 really ships, plus the
+// docs/ROADMAP.md (Transmission 4.1, qBittorrent 5). Only rows Torrenta 0.2.0 really ships, plus the
 // one it deliberately leaves for later, so the table never claims more than the release does.
 type Mark = "yes" | "no" | "later";
 const compare: { feature: string; t: Mark; tNote?: string; q: Mark; us: Mark }[] = [
@@ -98,6 +98,7 @@ const compare: { feature: string; t: Mark; tNote?: string; q: Mark; us: Mark }[]
   { feature: "IP filter from a blocklist URL, manual bans", t: "yes", q: "yes", us: "yes" },
   { feature: "Alternative speed limits on a weekly schedule", t: "yes", q: "yes", us: "yes" },
   { feature: "Offers the magnet or link on the clipboard", t: "no", q: "no", us: "yes" },
+  { feature: "Downloads links to plain files too, beside the torrents", t: "no", q: "no", us: "yes" },
   { feature: "Drive a remote Transmission daemon", t: "yes", tNote: "remote GUI", q: "no", us: "yes" },
   { feature: "Settings synced between machines through Git", t: "no", q: "no", us: "yes" },
   { feature: "A web UI of its own", t: "yes", q: "yes", us: "later" },

@@ -13,6 +13,6 @@ The details pane shows the selected torrent, under the list or beside it on the 
 - **The speed** of the last minutes, as a sparkline that grows with the history the selection has.
 - **The facts**: peers and seeds, downloaded and uploaded, ratio, save path, both info-hashes, piece size, availability, wasted bytes, times, next announce, tracker.
 
-The other tabs: **Files** (priorities, open, a glyph by kind), **Peers** (with Ban Peer and Copy Address), **Trackers** (add, remove, reannounce), **Log** (the event log for this torrent alone) and **Speed** (its own graph). The header's buttons are the window's commands, so they show the same chords.
+The other tabs: **Files** (priorities, open, a glyph by kind), **Peers** (with Ban Peer and Copy Address), **Trackers** (add, remove, reannounce), **Log** (the event log for this torrent alone) and **Speed** (its own graph). The header's buttons are the window's commands, so they show the same chords, each with its glyph in a colour of its own.
 
-`Ctrl+Shift+D` shows or hides the pane; View → Details Pane on the Right moves it, and each place keeps its own size.
+`Ctrl+I` shows or hides the pane; View → Details Pane on the Right moves it, and each place keeps its own size.
