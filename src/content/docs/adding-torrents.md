@@ -19,9 +19,10 @@ Every way of adding a torrent ends in the same Add dialog, unless you tell Torre
 | The desktop | A double-clicked `.torrent` or a browser's `magnet:` link |
 | A watched folder | Added without a dialog; see [Watch folders](/docs/automation) |
 | Search and RSS | `Enter` on a result or an article; see [Search](/docs/search) and [RSS](/docs/rss) |
+| A link to any other file | Pasted, typed or dropped like a torrent link; see [Links that are not torrents](#links-that-are-not-torrents) |
 
-When the window comes back to the front and the clipboard holds a magnet or a torrent link, the
-status bar says so and names the key to add it. A link to a `.torrent` is fetched first; a file
+When the window comes back to the front and the clipboard holds a magnet, a torrent link or a
+link to a file, the status bar says so and names the key to add it. A link to a `.torrent` is fetched first; a file
 larger than 10 MiB is refused as not being a torrent.
 
 ### From the desktop and a second launch
@@ -87,6 +88,40 @@ the swarm again.
 Tick **Next time, add with these settings without asking** in the dialog, or **Settings →
 Adding torrents → Add without asking**, and every input is added with the defaults and no
 dialog opens. Untick the setting to bring the dialog back.
+
+## Links that are not torrents
+
+A link to a file that is not a torrent (http, https, ftp, ftps or sftp) is downloaded by
+[curl](https://curl.se) and joins the list beside the torrents. Instead of the Add dialog,
+**Download Link** asks three things:
+
+- **Folder**, with Browse and the free space there. The download folder by default.
+- **Name**: the link's own to begin with. A name you type is kept over the one the server gives.
+- **Start paused.**
+
+"Add without asking" skips it, as it does the Add dialog. Links that arrive together are asked
+about one after the other.
+
+The file grows under a `.part` name and takes the server's name for it when it is done, never over
+a file that is already there. Pause stops curl; resume carries on from where it stopped. A link
+that turns out to be a `.torrent` is added as a torrent when it arrives. The clipboard offers a
+link to a file the way it offers a magnet; a link to a web page is not offered.
+
+In the list a download has a chain before its name, Done where a torrent would be Seeding, and the
+server where a torrent names its peers. The sidebar's **From links** and the omnibox's `is:link`
+pick them out. Pause, remove, a category, tags, Rename, Set Location and Limits work as they do
+for a torrent; commands only a torrent understands (Recheck, Reannounce, Sequential, Super
+Seeding, the queue, Copy Info-Hash, Copy Magnet Link, Export .torrent) are off for downloads and
+skip them in a mixed selection.
+
+**Settings → Adding torrents** has two rows for them:
+
+- **Links at once**: how many run at the same time (3); the rest wait their turn.
+- **curl program**: empty uses the curl on the `PATH`.
+
+curl runs through the engine's proxy, and the download limit in force (the alternative one
+included) is shared equally among the downloads from links, apart from the torrents'; a download's
+own limit holds when it is lower. They run on this machine whichever engine has the torrents.
 
 ## Where the files go
 

@@ -6,7 +6,7 @@ order: 5
 ---
 
 The details pane shows one torrent: the one selected. With several selected, it asks you to
-select one. `Ctrl+Shift+D` (**View → Details Pane**) shows or hides it.
+select one. `Ctrl+I` (**View → Details Pane**) shows or hides it.
 
 ## Where it sits
 

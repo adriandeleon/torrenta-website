@@ -4,10 +4,10 @@
 export type NewsItem = { title: string; detail: string };
 
 export const whatsNew: NewsItem[] = [
-  { title: "The first release", detail: "Torrenta 0.1.0 is out for Linux (x64), macOS (Apple Silicon) and Windows (x64): installers with their own Java runtime, nothing else to install." },
-  { title: "Search built in", detail: "Prowlarr or Jackett over Torznab, or a definition file per site; every provider asked at once, results as they arrive, the same torrent shown once." },
-  { title: "RSS with auto-download rules", detail: "Feeds refreshed on a timer, qBittorrent-style rules with episode filters, and a live list of what a rule matches as you type it." },
-  { title: "A Transmission daemon as the engine", detail: "Drive a seedbox or a NAS from the same window; what the daemon cannot do is hidden rather than greyed out." },
-  { title: "Create torrents", detail: "Hybrid, v1 or v2, piece size picked for you, trackers by tier, web seeds; seeds the moment it is made." },
-  { title: "Six languages", detail: "English, Deutsch, Español, Français, Italiano and Português, every string included." },
+  { title: "Torrenta 0.2.0", detail: "Out for Linux (x64), macOS (Apple Silicon) and Windows (x64), each installer with its own Java runtime." },
+  { title: "Downloads from links", detail: "A link to any file, not only a torrent, joins the list: fetched by curl, paused and resumed where it stopped, limited with the rest." },
+  { title: "Told apart at a glance", detail: "A chain before a download's name, a From links entry in the sidebar, and is:link / is:torrent in the omnibox." },
+  { title: "A sidebar that folds and resizes", detail: "A click folds a section, the edge drags wider or narrower, and both are remembered." },
+  { title: "Details at once", detail: "The details pane fills in the moment you click a torrent, not at the next tick, and Ctrl+I shows or hides it." },
+  { title: "Glyphs where they help", detail: "Beside each Settings page, and in colour on the details pane's Pause, Reannounce and Open folder." },
 ];

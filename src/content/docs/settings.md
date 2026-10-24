@@ -7,7 +7,7 @@ order: 13
 
 ## The Settings window
 
-`Ctrl+,` (**Settings…**) opens it. A sidebar holds the pages in two groups:
+`Ctrl+,` (**Settings…**) opens it. A sidebar holds the pages, each with its glyph, in two groups:
 
 | Group | Pages |
 | --- | --- |

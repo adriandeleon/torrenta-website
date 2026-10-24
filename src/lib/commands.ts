@@ -83,7 +83,7 @@ export const commandGroups: CmdGroup[] = [
       { id: "show-all", title: "Show: All", keys: [] },
       { id: "toggle-sidebar", title: "Toggle Sidebar", keys: [["Shortcut", "Shift", "B"]] },
       { id: "sidebar-side", title: "Move Sidebar to the Other Side", keys: [] },
-      { id: "toggle-detail", title: "Toggle Details Pane", keys: [["Shortcut", "Shift", "D"]] },
+      { id: "toggle-detail", title: "Toggle Details Pane", keys: [["Shortcut", "I"]] },
       { id: "detail-side", title: "Move Details Pane Between Bottom and Right", keys: [] },
       { id: "toggle-toolbar", title: "Toggle Toolbar", keys: [] },
       { id: "toggle-density", title: "Toggle Row Density (Comfortable / Compact)", keys: [] },

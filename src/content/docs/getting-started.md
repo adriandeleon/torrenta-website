@@ -48,7 +48,7 @@ Allow it once under **System Settings → Privacy & Security → Open Anyway**.
 Run the `.msi`. The installer is unsigned, so SmartScreen may warn on the first run; allow it to
 continue. The installer associates `.torrent` files with Torrenta.
 
-Homebrew and winget packages are not published yet; 0.1.0 is on GitHub only.
+Homebrew and winget packages are not published yet; releases are on GitHub only.
 
 ## First launch
 
@@ -76,7 +76,7 @@ everywhere.
    `Enter` to add. `Shift+Enter` adds it paused.
 
 The torrent appears in the list with its progress, rates and a one-line status. Select it and
-press `Ctrl+Shift+D` for the [details pane](/docs/details-pane), which tells you why a torrent
+press `Ctrl+I` for the [details pane](/docs/details-pane), which tells you why a torrent
 is not moving when it is not. See [Adding torrents](/docs/adding-torrents) for every option in
 the dialog.
 
@@ -90,7 +90,7 @@ the dialog.
 | `Ctrl+O` | Add a `.torrent` file |
 | `Space` | Pause the selection, or resume it if it is all paused |
 | `Delete` | Remove the selection (it asks first); `Shift+Delete` also deletes the files |
-| `Ctrl+Shift+D` | Show or hide the details pane |
+| `Ctrl+I` | Show or hide the details pane |
 | `Ctrl+1` / `Ctrl+2` / `Ctrl+3` | Transfers, Search, RSS |
 | `Ctrl+,` | Settings |
 
