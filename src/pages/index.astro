@@ -185,7 +185,7 @@ const platforms = [
             src={url("screenshots/hero/transfers.png")}
             alt="Torrenta's main window: a sidebar of filters, five torrents downloading and seeding, and the details pane showing the selected torrent's pieces, a speed graph and its facts"
             width="1720"
-            height="911"
+            height="882"
             fetchpriority="high"
           />
         </picture>
@@ -1348,6 +1348,8 @@ const platforms = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Dialogs are taller than 16:9; their top is what says what they are. */
+    object-position: top;
     display: block;
   }
   .card h4 {
