@@ -11,7 +11,7 @@ order: 13
 
 | Group | Pages |
 | --- | --- |
-| Application | General, Adding torrents, Watch folders, Automation, Search, RSS, Sync, Categories and tags |
+| Application | General, Keyboard, Adding torrents, Watch folders, Automation, Search, RSS, Sync, Remote access, Categories and tags |
 | Engine | Engine, Connection, Protocol, IP filter, Speed, Queue and share limits |
 
 There is no OK button: every control applies the moment it changes, and the settings file is
@@ -53,9 +53,22 @@ itself reports stays as it is.
 
 ## Keyboard
 
-**Settings → General → Keyboard → Command palette** chooses the palette's key: `Alt+X` (the
-default) or `Ctrl+Shift+P`. It applies at once, and the menus, the toolbar tooltip and the
-palette show whichever is in force. See [Keyboard](/docs/keyboard).
+**Settings → Keyboard** lists every command under its menu with the chord it is on, and changes
+any of them:
+
+- **Click a command's shortcut and press the new one.** A function key works on its own; any
+  other key needs `Ctrl`, `Alt` or `Cmd`, since a bare key belongs to the filter box.
+- **A shortcut another command has** asks you to press it again, then moves it here.
+- **`Backspace`** leaves a command with none; **Reset** puts one back on its default, and **Reset
+  All Shortcuts** every one.
+- Commands with no shortcut can be given one, and so can the view digits and the first nine
+  saved views. Select All (`Ctrl+A`) is the list's own and cannot be moved.
+
+A change applies at once to the menus, the palette, the toolbar's tooltips and the view strip, and
+syncs with the other settings as `keys.<command>=Shortcut+Shift+K`, where `Shortcut` is `Cmd` on
+a Mac and `Ctrl` elsewhere. The command palette's own chord (`Alt+X` by default) is here too; it
+used to be under General, and a `Ctrl+Shift+P` chosen there is kept. See
+[Keyboard](/docs/keyboard).
 
 ## Tray, badge and file handler
 
@@ -82,6 +95,12 @@ effect after a restart.
   number of downloading torrents on a Linux launcher that reads Unity's badge (KDE's task manager,
   GNOME's Dash to Dock), cleared when nothing downloads. Windows has no badge for Torrenta's
   window.
+
+## Removed files
+
+**Settings → General → Move removed files to the trash** (on by default): Remove with files puts
+a torrent's files in the desktop's trash, where they can be restored from, instead of deleting
+them for good. See [The transfer list](/docs/transfer-list#removed-files-go-to-the-trash).
 
 ## Updates and diagnostics
 
@@ -116,9 +135,19 @@ the one that can read the repository is used. Put no password or token in the UR
 local IP filter list, the clocks of the last checks, the proxy password, the per-torrent entries,
 the sidebar's choices, the window's size and place, the run-on-event commands, the New Torrent
 dialog's last folder and trackers, a skipped update, the engine profile
-in use, the desktop handler and badge switches, and the sync connection itself. Everything else
-in the settings file travels, including the theme, the language, limits, bans and default
-trackers.
+in use, the desktop handler and badge switches, the alternative speed limits' on/off switch,
+everything on the [Remote access](/docs/remote-access) page, the media player, and the sync
+connection itself. Everything else in the settings file travels, including the theme, the
+language, limits, bans, default trackers, your [shortcuts](#keyboard) and your
+[saved views](/docs/transfer-list#saved-views).
+
+Since 0.3.0 sync also carries:
+
+- **Category names and tags.** One added on one computer appears on the others, and one deleted
+  is deleted everywhere. Names only: each computer keeps its own folder for a category. The first
+  sync after updating only adds, so nothing that exists on just one computer is lost.
+- **Search providers**, without their API keys: a server that arrives asks for its key once on
+  that computer. Definition files you added or changed travel a file at a time.
 
 ## The files Torrenta keeps
 
@@ -130,10 +159,11 @@ Everything is in `~/.torrenta`, unless moved with `--config-dir DIR` or `TORRENT
 | `torrents/<info-hash>.fastresume` | One per torrent: libtorrent's resume data, info dictionary inside. Deleting one forgets one torrent | No |
 | `torrents/<info-hash>.labels` | That torrent's category and tags | No |
 | `torrents/<info-hash>.storage` | What is still owed to its files: a move, names to take back | No |
-| `categories.json`, `tags.json` | Categories (name, save path) and tags | No |
+| `categories.json`, `tags.json` | Categories (name, save path) and tags | The names |
 | `watch-folders.json` | Watched folders and their choices | No |
-| `search-providers.json` | Torznab providers, API keys included | No |
-| `search-providers/<id>.json` | Definition-file providers | No (which are off syncs) |
+| `search-providers.json` | Torznab providers, API keys included | The servers, never the keys |
+| `search-providers/<id>.json` | Definition-file providers | The ones you added or changed, and which are off |
+| `keys/<name>.key` | The key of an [updatable torrent](/docs/updatable-torrents) you publish; readable by you alone | Never |
 | `rss/feeds.json`, `rss/articles/<id>.json`, `rss/rules.json` | Feeds, articles (at most 500 per feed), rules | No |
 | `profiles.json` | Remote engine profiles; readable by you alone | No |
 | `stats.properties` | All-time totals: bytes down and up, time active | No |

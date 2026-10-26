@@ -24,8 +24,11 @@ Open **Settings → Search** and press **Add…** under **Search providers**. Th
 **Test** asks the server who it is and how many categories it knows, both in the dialog and on
 the page. The page lists each provider with its URL and the category count the last Test found.
 
-The provider list, API keys included, is `search-providers.json` in the config folder. It stays
-on this machine and never syncs, because the key is a secret.
+The provider list is `search-providers.json` in the config folder. With
+[settings sync](/docs/settings#settings-sync) on, the servers travel to your other computers, but
+their API keys never do, because a key is a secret. A server that arrives says **needed here**
+until you type its key once on that computer; until then a search names it and asks for the key
+instead of being refused by the server.
 
 ## The Search tab
 
@@ -39,7 +42,8 @@ transfers, with the query focused. `Esc` returns to the transfers as they were.
   the tab links to Settings → Search.
 - **The status line**: one clause per provider, such as "Prowlarr: 42 results · Jackett: could
   not connect".
-- **The results**: Name, Size, Seeds, Leechers, Date and Provider.
+- **The results**: Name, Size, Seeds, Leechers, Date, Provider and Category (for results from a
+  Torznab server).
 
 `Enter` asks every chosen provider at once. Each answer lands in the table as it arrives, and
 the rows are updated in place so the selection survives. A new search drops the one still
@@ -49,6 +53,25 @@ The same torrent from two providers is shown once (matched by info-hash, else by
 better-seeded copy kept. Results are ranked by seeds, then by how many of the query's words the
 name contains, then by date, until you click a column to sort by it. The table's columns are
 remembered.
+
+### Filtering the results
+
+Once a search has results, a **Filter** box above them narrows the table, in the
+[omnibox's](/docs/transfer-list#the-omnibox) language:
+
+| Term | Keeps |
+| --- | --- |
+| `provider:jack` | results from a provider whose name contains it |
+| `cat:movies` | results in that category |
+| `size>1g` | size, with `k`, `m`, `g` or `t` |
+| `seeds>=10`, `leechers<5` | seeds and leechers, with `<`, `<=`, `>`, `>=`, `=` |
+| `date<7d`, `date>=2026-01-01` | published within seven days, or since a date (a range is two terms) |
+| words | the name |
+
+A leading `-` means "not". Each term shows as a chip, a red one saying why when it does not read,
+and the box says how many results it lets through. `/` in the results, or `Ctrl+K`, goes to the
+box. The results' right-click menu has **Show Only Results From …** and **Hide Results From …** for
+the result's provider, and **Show Only …** for its category.
 
 ### Adding a result
 
@@ -83,7 +106,8 @@ instead to be rid of it.
 **Settings → Search → Definition files** lists the files with their type and status (loaded, or
 why not), with **Enable / Disable**, **Reload definitions** and **Open folder**. The folder is
 also re-read when the Search tab opens, so a file you drop in is a provider chip at once. Which
-files are switched off is a setting that syncs. A file that does not load is reported once in
+files are switched off is a setting that syncs, and so are the definition files you added or
+changed, a file at a time (the shipped examples you left alone stay out of it), and a deletion. A file that does not load is reported once in
 the Event Log, with the key at fault; unknown keys are errors, so a typo cannot pass silently.
 
 The format, field by field, is in
@@ -98,6 +122,7 @@ The format, field by field, is in
 | `Space` | A chip | Toggle it |
 | `Down` | Query | Into the results |
 | `Enter` | Results | Open the Add dialog for the result |
+| `/` or `Ctrl+K` | Results | Into the results' filter box |
 | `Ctrl+C` | Results | Copy its link |
 | `Esc` | Results | Back to the query |
 | `Esc` | Query | Back to the transfers |

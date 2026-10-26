@@ -37,9 +37,18 @@ offers what can be done about it. The first rule that fits wins:
 | Peers are connected but none is sending | that they send when a slot frees; nothing to do but wait | none |
 | Nothing has arrived for a while | how long, though peers are connected | Ask the trackers again |
 
+Two more cards can appear above it:
+
+- **Files to choose**, for a torrent added with "Add now, pick files when ready" once its file
+  list is in, with **Choose files…**.
+- **A red card for a locked archive**, when the torrent's first `.rar`, `.zip` or `.7z` turns
+  out to be encrypted, with **Skip that file** and **Remove the torrent**. See
+  [the content check](/docs/adding-torrents#the-content-check).
+
 **The piece strip.** A bar of the torrent's pieces, bucketed to fit the width. Pieces you have
 are filled; pieces that are missing and that no connected peer has are amber. A seed shows no
-amber.
+amber. While a file is [streaming](#stream-in-a-player), a ring marks the pieces being read
+ahead.
 
 **The sparkline.** Download and upload over the last minute, or over as much history as the
 selection has.
@@ -59,7 +68,28 @@ A file's icon comes from its extension: folder, video, audio, image, book (ebook
 archives), document, subtitle, archive (split archives such as `.r00` or `.001` included), disc
 image, data, program, or other.
 
+A file that was [already on disk](/docs/adding-torrents#files-already-on-disk) in another
+torrent is marked, and its tooltip says where it came from ("Linked from …").
+
 The Files tab is empty until a magnet's metadata arrives.
+
+### Stream in a player
+
+The Files tab's right-click menu also has **Stream in Player** and **Copy Stream URL**: play a
+file while it downloads.
+
+- **Stream in Player** opens the file in mpv or VLC, wherever they are installed, or in the
+  program chosen under **Settings → Adding torrents → Media player**. The player is given the
+  file's address as its one argument, with no shell.
+- **Copy Stream URL** copies the address for any other player on this computer.
+
+The pieces the player is about to reach come first: the file's first and last pieces at the start
+(where a video's index sits), then a window ahead of the playhead that tightens as the player
+nears it. A jump ahead waits for its piece rather than playing garbage. A file you had skipped
+becomes wanted, at low priority, once you play it.
+
+The address is on this computer only: loopback, a port of the system's choosing, and a token per
+file, so nothing else can be fetched from it. Streaming needs libtorrent.
 
 ## Peers
 

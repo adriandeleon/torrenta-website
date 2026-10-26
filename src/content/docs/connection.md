@@ -15,8 +15,13 @@ the moment you change them, at start and live.
 - **Port**, or **Random port**.
 - **Map the port with UPnP / NAT-PMP**: asks your router to forward the port.
 - **Listen on IPv6**.
-- **Bind to**: an address or a network interface; blank means all interfaces. This setting stays
-  on this machine.
+- **Bind to**: an address or a network interface, for a VPN or one network card only; blank
+  means all interfaces. Both the connections Torrenta accepts and the ones it makes leave from it,
+  and none is made while it is missing. This setting stays on this machine.
+- **Check where traffic leaves**: off by default. See [The leak check](#the-leak-check).
+- **Address-echo server**: a URL that answers with the caller's address and nothing else;
+  `https://api.ipify.org` when left empty.
+- **Pause torrents when exposed**.
 
 **Limits**
 
@@ -100,4 +105,42 @@ The status bar shows the listening port with a dot and one of four words:
 CGNAT included, proves nothing. Changing the port starts the check over. The tooltip also says
 whether the router forwarded the port through UPnP or NAT-PMP.
 
+With **Bind to** set, the port also turns red when the interface is down or gone ("tun0 missing ·
+reaching no one"); see below.
+
 Next to it, **DHT** shows the number of nodes in the routing table, or "DHT off".
+
+## The leak check
+
+Binding Torrenta to a VPN's interface is only as good as the binding, so with **Bind to** set
+Torrenta watches it.
+
+**The interface, every five seconds.** When it goes down or disappears, the port in the status
+bar turns red and the Event Log says so; nothing goes out another way in the meantime, since
+every connection is bound. When it comes back, or its address changes, Torrenta binds to it
+again by itself. The port's tooltip names the interface and its addresses, and the address peers
+see this machine as, once libtorrent has settled on one.
+
+**A shield beside the port** gives the verdict:
+
+| Shield | Means |
+| --- | --- |
+| **Protected** | Traffic through the binding leaves as the address peers see, and nothing the check can see goes out another way |
+| **Exposed** | Peers see this machine as the default route's address, not the binding's: something leaves around it |
+| **Halted** | The interface is down or gone: nothing goes out, so nothing leaks, and nothing is downloaded either |
+| **Unchecked** | The exit check is off, failed, or its answers do not match what peers see |
+
+A click on the shield shows the three addresses it decided from (through the binding, by the
+default route, and what peers see), with **Check now**.
+
+**Check where traffic leaves** is off by default, because it tells a server you choose this
+machine's addresses. On, it asks the address-echo server every ten minutes, and when the binding
+changes, which address a request through the bound interface comes from and which one by the
+default route. A VPN that carries everything is never called a leak.
+
+**Pause torrents when exposed** pauses every running torrent while the verdict is Exposed, and
+resumes exactly those once it is Protected again.
+
+Tracker names are still looked up through the system's resolver unless a proxy is set; the card
+says so. With a [Transmission daemon](/docs/remote) the leak check is hidden: the daemon's network
+is not this machine's.

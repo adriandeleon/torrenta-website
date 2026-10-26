@@ -23,6 +23,11 @@ when complete. Changing a category's path later moves nothing already added.
 categories, sets their save paths, and adds and removes tags. Removing a category leaves its
 torrents filed under no category; removing a tag takes it off every torrent. Both ask first.
 
+With [settings sync](/docs/settings#settings-sync) on, the category names and tags travel: one
+added on one computer appears on the others, and one deleted is deleted everywhere (torrents filed
+under it there let go of it). Names only: each computer keeps its own folder for a category, and
+one that arrives downloads to the default folder until it is given one.
+
 The sidebar has a section for each, with counts, and the omnibox takes `cat:` and `tag:` terms.
 See [The transfer list](/docs/transfer-list#the-omnibox).
 
@@ -94,6 +99,31 @@ settings file and forgotten when the torrent is removed.
   days of the week. A window that runs past midnight belongs to the day it starts on. The
   schedule is checked every minute.
 - **Count protocol overhead** in the limits.
+
+Switching the alternative limits on or off by hand holds until the schedule, the battery or the
+network next changes, as in qBittorrent's schedule override. The switch is this machine's and
+does not travel with settings sync.
+
+### Battery and metered networks
+
+**Settings → Speed → Battery and network** has two rows, each **Nothing**, **Alternative speed
+limits** or **Pause the torrents**:
+
+- **On battery**: while the computer runs on its battery. Paused torrents are resumed when it is
+  plugged in again.
+- **On a metered network**: while the network is one the system marks as paid by the byte (a
+  phone's hotspot, a capped plan).
+
+The status bar's pill says why the alternative limits are on ("Alt speed: on battery"). A
+condition pauses what runs when it starts; a torrent you resume by hand meanwhile stays resumed.
+
+| Platform | Battery from | Metered network from |
+| --- | --- | --- |
+| Linux | UPower | NetworkManager |
+| macOS | `pmset` | not available: macOS has no way to tell, so the row is not offered |
+| Windows | The system's power status | The connection's cost, as Windows reports it |
+
+Hidden with a [Transmission daemon](/docs/remote).
 
 A peer on your local network is not held to the session's rate limits; a torrent's own limit
 still applies to it.

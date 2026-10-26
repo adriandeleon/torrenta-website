@@ -28,6 +28,10 @@ What happens to a file:
 - When it has been added, the file is deleted or renamed `.added`, as the entry says. The Event Log
   says "Added … from watch folder …".
 - A torrent already in the list is reported, and the file is still handled.
+- What is added goes through the [content check](/docs/adding-torrents#the-content-check), as
+  **Flagged files when adding without a dialog** says, and links
+  [files already on disk](/docs/adding-torrents#files-already-on-disk) without asking. A
+  `.magnet` line can be an [updatable link](/docs/updatable-torrents).
 - A file that is not a torrent is renamed `.invalid` once and reported once, then left alone.
 - A folder that does not exist is noted on the page's status line.
 
@@ -44,6 +48,7 @@ this machine and never syncs.
 | **On added** | A torrent was added (not the ones restored at start) |
 | **On finished** | A download finished |
 | **On seeding done** | A [share limit](/docs/queue-and-limits#share-limits) paused or removed it |
+| **On a newer version** | A newer version of an [updatable torrent](/docs/updatable-torrents) was added; the placeholders name the new one |
 
 The line is split as a shell would split it (quotes keep a value together), and each argument is
 filled in on its own, so a name with spaces stays one argument. **No shell runs it**: pipes,
@@ -87,6 +92,7 @@ The command lines name programs on this machine, so they stay on it and never sy
 - **Download finished** (the only one on by default)
 - **Seeding done**
 - **Torrent or tracker error**, for a torrent, file or tracker error
+- **Newer version added**, for an [updatable torrent](/docs/updatable-torrents)
 
 Each shows a short notification such as "*name* finished". They go through the platform's own
 facility:

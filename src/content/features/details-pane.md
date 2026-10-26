@@ -9,10 +9,11 @@ summary: "Why a torrent is not moving, said in words with a remedy, above its pi
 The details pane shows the selected torrent, under the list or beside it on the right, and opens on its **Overview**.
 
 - **A diagnosis.** When a torrent is not moving, a card says why, in order: an error, queued, no peers, pieces nobody in the swarm has, peers choking you, or simply quiet. When the missing pieces all fall in one file you wanted, the card offers to skip that file.
+- **A red card for a locked archive**: when a torrent's first `.rar`, `.zip` or `.7z` turns out to ask for a password, with Skip that file and Remove the torrent.
 - **The pieces**, as a strip: what you have, what is missing, and in amber what no connected peer has a copy of.
 - **The speed** of the last minutes, as a sparkline that grows with the history the selection has.
 - **The facts**: peers and seeds, downloaded and uploaded, ratio, save path, both info-hashes, piece size, availability, wasted bytes, times, next announce, tracker.
 
-The other tabs: **Files** (priorities, open, a glyph by kind), **Peers** (with Ban Peer and Copy Address), **Trackers** (add, remove, reannounce), **Log** (the event log for this torrent alone) and **Speed** (its own graph). The header's buttons are the window's commands, so they show the same chords, each with its glyph in a colour of its own.
+The other tabs: **Files** (priorities, open, a glyph by kind, [Stream in Player](/features/streaming), and a mark on a file [linked from another torrent](/features/dedup)), **Peers** (with Ban Peer and Copy Address), **Trackers** (add, remove, reannounce), **Log** (the event log for this torrent alone) and **Speed** (its own graph). The header's buttons are the window's commands, so they show the same chords, each with its glyph in a colour of its own.
 
 `Ctrl+I` shows or hides the pane; View → Details Pane on the Right moves it, and each place keeps its own size.
