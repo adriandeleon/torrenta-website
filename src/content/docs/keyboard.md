@@ -15,8 +15,10 @@ page covers the rules behind them and the keys that belong to one part of the wi
 - **Every action is a command.** A command has one name, one key and one action, and the menu
   bar, the list's right-click menu, the toolbar and the palette all run the same command. A
   command that cannot run right now is disabled in all of them at once.
-- **Chords are declared once**, on the menu item, so the menu and the key cannot disagree. A
-  chord is `Ctrl+key` on Linux and Windows and `Cmd+key` on macOS. `Ctrl+Tab` and
+- **Chords are declared once**, on the command, so the menu and the key cannot disagree, and
+  every one can be changed under **Settings → Keyboard** (see
+  [Settings](/docs/settings#keyboard)). A chord is `Ctrl+key` on Linux and Windows and `Cmd+key`
+  on macOS. `Ctrl+Tab` and
   `Ctrl+Shift+Tab` are `Ctrl` everywhere, since `Cmd+Tab` belongs to macOS.
 - **Some keys act on the list only.** `Space` (pause or resume), `Delete` or `Backspace`
   (remove), `Shift+Delete` (remove with data) and `F2` (rename) work while the list has the
@@ -32,7 +34,7 @@ page covers the rules behind them and the keys that belong to one part of the wi
 are highlighted, and each row shows its key, so the palette is also how you learn them. `↑` `↓`
 move, `Enter` runs, `Esc` closes.
 
-**Settings → General → Keyboard** can make the key `Ctrl+Shift+P` instead. Typing `>` in the
+**Settings → Keyboard** can put it on another key, `Ctrl+Shift+P` say. Typing `>` in the
 omnibox opens the palette too, with what you typed.
 
 The palette also has commands with no key, such as **Show: Downloading** and the other sidebar
@@ -48,11 +50,14 @@ terms.
 | --- | --- |
 | `Space` after a `key:value` term | Turns it into a chip |
 | `Backspace` on an empty box | Hands the last chip back for editing |
-| `>` first | Opens the palette with what you typed |
+| `>` first | Opens the palette with what you typed; a [command with an argument](/docs/transfer-list#commands-with-arguments) acts on every match |
+| `Ctrl+S` | Saves the filter as a [view](/docs/transfer-list#saved-views) |
 | `Enter` | Selects every match and returns to the list |
 | `Esc` | Empties the box, or returns to the list when it is empty |
 
-On the list, `Esc` clears the filter first, then the selection.
+On the list, `Esc` clears the filter first, then the selection. `Ctrl+Alt+1` to `Ctrl+Alt+9`
+choose the first nine saved views from anywhere, and `Ctrl+Z` undoes the last remove, move,
+category or tags (in a text field, it is the field's own undo).
 
 ## The sidebar
 
@@ -104,6 +109,7 @@ In its file tree:
 | `Down` | Query | Into the results |
 | `Enter` | A result | Open the Add dialog for it |
 | `Ctrl+C` | A result | Copy its link |
+| `/` or `Ctrl+K` | Results | Into the results' filter box |
 | `Esc` | Results | Back to the query |
 
 ## The RSS tab

@@ -4,10 +4,10 @@
 export type NewsItem = { title: string; detail: string };
 
 export const whatsNew: NewsItem[] = [
-  { title: "Torrenta 0.2.0", detail: "Out for Linux (x64), macOS (Apple Silicon) and Windows (x64), each installer with its own Java runtime." },
-  { title: "Downloads from links", detail: "A link to any file, not only a torrent, joins the list: fetched by curl, paused and resumed where it stopped, limited with the rest." },
-  { title: "Told apart at a glance", detail: "A chain before a download's name, a From links entry in the sidebar, and is:link / is:torrent in the omnibox." },
-  { title: "A sidebar that folds and resizes", detail: "A click folds a section, the edge drags wider or narrower, and both are remembered." },
-  { title: "Details at once", detail: "The details pane fills in the moment you click a torrent, not at the next tick, and Ctrl+I shows or hides it." },
-  { title: "Glyphs where they help", detail: "Beside each Settings page, and in colour on the details pane's Pause, Reannounce and Open folder." },
+  { title: "Torrenta 0.3.0", detail: "Out for Linux (x64), macOS (Apple Silicon) and Windows (x64), each installer with its own Java runtime." },
+  { title: "Sonarr, Radarr and a phone", detail: "Remote access speaks qBittorrent's web API, signed in always, and serves a web UI such as VueTorrent; <code>torrenta-nox</code> runs it all without a window." },
+  { title: "Bring your torrents over", detail: "File → Import from another client… takes qBittorrent's, Transmission's and Deluge's torrents at their progress, without a check." },
+  { title: "Look before you add", detail: "The Add dialog flags a <code>Film.mkv.exe</code>, says whether the swarm is healthy, and links files you already have instead of downloading them." },
+  { title: "Keys for many at once", detail: "Saved views, <code>&gt;set-category Films</code> over every match, Ctrl+Z for the last ten actions, and shortcuts you can change." },
+  { title: "Protocol extras", detail: "Play a file while it downloads, follow or publish updatable torrents (BEP 46), slow down on battery, and a leak check for a VPN." },
 ];

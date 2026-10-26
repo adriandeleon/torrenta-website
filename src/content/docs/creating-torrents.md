@@ -66,6 +66,14 @@ with the source's parent folder as its save path and the hash check skipped, so 
 once. The status line says "added and seeding", or why it was not added. If the torrent is
 already in the list, the one already there is kept.
 
+## Publishing it as updatable
+
+Tick **Publish as updatable** and give its key a name to make an
+[updatable torrent](/docs/updatable-torrents) (BEP 46): Create makes the key, seeds the torrent
+and puts its link in the DHT, and the dialog shows the updatable link others follow. **Torrent →
+New Version…** on a published torrent opens this dialog for the next version under the same key.
+The key is kept in `keys/<name>.key`, on this computer only; keep a copy.
+
 ## Exporting a torrent you already have
 
 **Torrent → Export .torrent…** (`Ctrl+Shift+E`) writes the `.torrent` of a torrent in the list:

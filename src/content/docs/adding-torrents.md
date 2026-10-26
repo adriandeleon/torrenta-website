@@ -20,6 +20,8 @@ Every way of adding a torrent ends in the same Add dialog, unless you tell Torre
 | A watched folder | Added without a dialog; see [Watch folders](/docs/automation) |
 | Search and RSS | `Enter` on a result or an article; see [Search](/docs/search) and [RSS](/docs/rss) |
 | A link to any other file | Pasted, typed or dropped like a torrent link; see [Links that are not torrents](#links-that-are-not-torrents) |
+| An updatable link | A `magnet:?xs=urn:btpk:…` link, anywhere a magnet goes; see [Updatable torrents](/docs/updatable-torrents) |
+| Another client | File → Import from Another Client…; see [Importing](/docs/importing) |
 
 When the window comes back to the front and the clipboard holds a magnet, a torrent link or a
 link to a file, the status bar says so and names the key to add it. A link to a `.torrent` is fetched first; a file
@@ -75,13 +77,84 @@ A magnet carries no file list. While the dialog is open, Torrenta fetches it and
 live ("Fetching file list · 3 peers · 12s"). Everything else can be set in the meantime. Then:
 
 - **Add now, pick files when ready** (`Enter`) adds the torrent at once, set to stop when its
-  metadata arrives. When it has, select the torrent and choose **Torrent → Choose Files…** (also
-  in the context menu and the palette) to tick its files; that starts it.
+  metadata arrives. When it has, the list reads **Files to choose** instead of "Paused by you",
+  and its Overview offers **Choose files…** (also **Torrent → Choose Files…**, the context menu
+  and the palette) to tick its files; that starts it. A restart before the file list arrived
+  keeps it waiting for you.
 - **Wait here for the file list** (`Ctrl+Enter`) keeps the dialog open until the tree is full.
   It is offered only while the list can still come.
 
 Either way, the new torrent starts with the peers the fetch already found instead of looking for
 the swarm again.
+
+### The content check
+
+Above the file tree, a card names the files that deserve a look before anything is downloaded:
+
+- a program named like a video or a document (`Film.mkv.exe`, spaces before the last dot
+  included);
+- a name whose real extension is hidden by right-to-left characters;
+- a Windows shortcut (`.lnk`, `.url` and the like);
+- a program, or a link to a web page, in a film or an album;
+- an archive where the name promises a film and nothing else is there;
+- a file named for a password or a codec.
+
+Red is danger, amber a caution. **Skip these files** unticks them and keeps the rest. A program
+in a software torrent is not flagged, and a file you skip stops being reported.
+
+Adds without a dialog (watch folders, RSS rules, an article's Download, Add without asking,
+[headless](/docs/headless) and [Remote access](/docs/remote-access)) follow **Settings → Adding
+torrents → Flagged files when adding without a dialog**: **Skip those files** (the default),
+**Refuse the torrent**, or **Add them anyway**. The Event Log says which, and what was found. A
+magnet has no file list yet, so it stops once its metadata is in, is checked, and then starts,
+starts without the flagged files, or is removed before anything was downloaded; a restart in
+between keeps it waiting.
+
+**An archive that asks for a password** is caught once the torrent starts: its first `.rar`,
+`.zip` or `.7z` gets its first piece before anything else, and if the archive is encrypted (its
+files, or its names too), the [Overview](/docs/details-pane#overview) shows a red card saying so,
+with **Skip that file** and **Remove the torrent**. A torrent that hides its content behind a
+password usually sells the password. This needs the files on this machine.
+
+### The Swarm line
+
+Under the free space, a **Swarm** line says how the swarm looks before you add, with the counts:
+
+| Verdict | Means |
+| --- | --- |
+| **Healthy** | Three seeds and up |
+| **Thin** | A seed or two, or no seed but every piece among the peers |
+| **Incomplete** | No seed, and pieces of the chosen files that no peer has |
+| **Dead** | No one at all |
+
+It is there at once for a `.torrent`, and for a magnet once its file list is in, and it follows
+the files you tick. It reads the trackers' counts and the peers it meets without downloading
+anything, and gives no time estimate: there is no rate to measure one from.
+
+A private torrent is not looked at, since a private tracker counts every announce, unless
+**Settings → Adding torrents → Look at a private torrent's swarm** is on. With a
+[Transmission daemon](/docs/remote) the line is not shown.
+
+### Files already on disk
+
+When a new torrent holds a file that another torrent in the list has complete, the dialog offers
+to put that file in place instead of downloading it: an **Already on disk** line such as "Link 3
+files (4.2 GB) from …", ticked by default.
+
+- **What matches.** For v2 and hybrid torrents, any file with the same content, whatever its
+  name. For a v1 torrent, a file whose pieces hold nothing else (a single-file torrent, or a
+  padded one) when the other torrent was made with the same piece size.
+- **A link** (on the same file system) writes no bytes: the two torrents share the file. The
+  add's own check then verifies every byte.
+- **On another drive** the file is copied: a clone where the file system can make one (`cp
+  --reflink` on Linux, `cp -c` on macOS), which uses no space either, else a full copy, whose size
+  the dialog shows first.
+
+**Settings → Adding torrents → Files already on disk** chooses: **Download them again**, **Link
+them, never copy**, **Link them, ask before copying** (the default) or **Link them, copy from
+other drives**. Watch folders, RSS rules and adds without a dialog link without asking. The
+[Files tab](/docs/details-pane#files) marks such a file: "Linked from …", "Cloned from …" or
+"Copied from …".
 
 ### Skipping the dialog
 

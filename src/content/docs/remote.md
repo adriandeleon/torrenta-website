@@ -59,7 +59,12 @@ greying them out or imitating them:
 - super seeding, a name of your own for a torrent (`F2`) and the content layout on add (files
   and folders can still be renamed from the Files tab),
 - adding and removing web seeds (the daemon lists them, but cannot change them),
-- sequential download, before RPC 18.
+- sequential download, before RPC 18,
+- since 0.3.0: undoing a remove, the Add dialog's Swarm line, linking
+  [files already on disk](/docs/adding-torrents#files-already-on-disk),
+  [importing from another client](/docs/importing), [streaming](/docs/details-pane#stream-in-a-player),
+  [updatable torrents](/docs/updatable-torrents), the battery and metered-network rules, and the
+  [leak check](/docs/connection#the-leak-check).
 
 **Open folder**, **Open file**, **Browse** and the free-space readout stay only when the daemon
 is on this machine (`localhost`, `127.*` or `::1`): a seedbox's paths are its own. For **Set

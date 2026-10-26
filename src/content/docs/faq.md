@@ -18,8 +18,10 @@ sends nothing about you or the machine beyond the request itself. Untick **Setti
 Updates → Check for updates**, or set `updates.check=false` in the settings file, to turn it off.
 
 Everything else that reaches the network is something you set up: the torrents themselves, your
-search providers, your RSS feeds, a blocklist URL, a Transmission daemon, and
-[settings sync](/docs/settings#settings-sync) to a Git repository you own.
+search providers, your RSS feeds, a blocklist URL, a Transmission daemon,
+[settings sync](/docs/settings#settings-sync) to a Git repository you own, and the
+[leak check's](/docs/connection#the-leak-check) address-echo server, which is off until you turn
+it on.
 
 ## Why is there no Intel Mac or ARM Linux build?
 
@@ -41,13 +43,22 @@ its files' checksums in `checksums_sha256.txt`.
 That is the goal for 1.0. The [roadmap](https://github.com/adriandeleon/torrenta/blob/master/docs/ROADMAP.md#parity-matrix)
 has a parity matrix comparing Transmission 4.1, qBittorrent 5 and Torrenta feature by feature.
 Torrenta uses the same engine as qBittorrent, so most of the work is exposing what libtorrent
-already does. A few things are deliberately left for after 1.0, such as a port test, email
-notifications and a headless mode.
+already does. It also speaks qBittorrent's web API, so the tools built around qBittorrent work
+with it, and [imports](/docs/importing) qBittorrent's, Transmission's and Deluge's torrents
+without a check. A few things are deliberately left for later, such as a port test and email
+notifications.
 
 ## Does it have a web UI?
 
-No. A web UI or RPC server of Torrenta's own is planned for after 1.0. Torrenta is a desktop
-window; it can, however, be the window for a remote daemon (next question).
+Not one of its own, but it can serve one. [Remote access](/docs/remote-access) speaks
+qBittorrent's WebUI API, so a web interface written for qBittorrent, such as VueTorrent, runs
+against Torrenta from a phone's browser, and Sonarr, Radarr and the phone apps made for
+qBittorrent connect to it. It is off until you switch it on, and always asks for a password.
+
+## Can it run on a server without a window?
+
+Yes: `torrenta --headless`, or the `torrenta-nox` launcher packaged beside the app, runs
+everything but the window. See [Headless](/docs/headless), with a systemd unit.
 
 ## Can it control a seedbox?
 

@@ -2,4 +2,4 @@
 // Source: Torrenta's pom.xml <version>, or the newest released CHANGELOG.md section
 // while the pom is on a -SNAPSHOT between releases.
 
-export const version = "0.2.0";
+export const version = "0.3.0";

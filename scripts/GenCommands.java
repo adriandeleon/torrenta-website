@@ -18,7 +18,9 @@ static final LinkedHashMap<String, List<String>> GROUPS = groups();
 // A compact source file has no static initialiser blocks, hence the method.
 static LinkedHashMap<String, List<String>> groups() {
     var GROUPS = new LinkedHashMap<String, List<String>>();
-    GROUPS.put("Adding torrents", List.of("create", "add-file", "add-magnet", "add-clipboard"));
+    GROUPS.put(
+            "Adding torrents",
+            List.of("create", "add-file", "add-magnet", "add-clipboard", "import-from-client", "new-version"));
     GROUPS.put(
             "The selection",
             List.of(
@@ -36,16 +38,18 @@ static LinkedHashMap<String, List<String>> groups() {
                     "open-folder",
                     "remove",
                     "remove-data",
+                    "undo",
                     "select-all"));
     GROUPS.put("Queue", List.of("queue-top", "queue-up", "queue-down", "queue-bottom"));
     GROUPS.put("Categories and tags", List.of("set-category", "edit-tags", "manage-categories"));
-    GROUPS.put("Copy", List.of("copy-name", "copy-hash", "copy-magnet"));
-    GROUPS.put("Views", List.of("transfers", "search", "rss", "view-next", "view-previous", "rss-run-rules"));
+    GROUPS.put("Copy", List.of("copy-name", "copy-hash", "copy-magnet", "copy-updatable-link"));
+    GROUPS.put("Views", List.of("transfers", "search", "search-clear", "rss", "view-next", "view-previous", "rss-run-rules"));
     GROUPS.put(
             "The window",
             List.of(
                     "palette",
                     "filter",
+                    "save-view",
                     "focus-sidebar",
                     "show-all",
                     "toggle-sidebar",
@@ -106,7 +110,8 @@ void main(String[] args) throws IOException {
         List<List<String>> keys = new ArrayList<>();
         List<String> accelerator = chord(a.get(2), messages);
         if (accelerator != null) keys.add(accelerator);
-        List<String> hint = chord(a.get(3), messages);
+        // Since 0.3.0 a command may leave the hint out (five arguments): the accelerator is its hint.
+        List<String> hint = a.size() == 6 ? chord(a.get(3), messages) : null;
         if (hint != null && !keys.contains(hint)) keys.add(hint);
         for (List<String> extra : EXTRA_KEYS.getOrDefault(id, List.of())) {
             if (!keys.contains(extra)) keys.add(extra);

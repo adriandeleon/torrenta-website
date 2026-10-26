@@ -16,6 +16,8 @@ export const commandGroups: CmdGroup[] = [
       { id: "add-file", title: "Add Torrent File…", keys: [["Shortcut", "O"]] },
       { id: "add-magnet", title: "Add Magnet Link…", keys: [["Shortcut", "M"]] },
       { id: "add-clipboard", title: "Add from Clipboard", keys: [["Shortcut", "V"]] },
+      { id: "import-from-client", title: "Import from Another Client…", keys: [] },
+      { id: "new-version", title: "New Version…", keys: [] },
     ],
   },
   {
@@ -35,6 +37,7 @@ export const commandGroups: CmdGroup[] = [
       { id: "open-folder", title: "Open Destination Folder", keys: [["Shortcut", "Shift", "O"]] },
       { id: "remove", title: "Remove…", keys: [["Delete"]] },
       { id: "remove-data", title: "Remove with Data…", keys: [["Shift", "Delete"]] },
+      { id: "undo", title: "Undo", keys: [["Shortcut", "Z"]] },
       { id: "select-all", title: "Select All", keys: [["Shortcut", "A"]] },
     ],
   },
@@ -61,6 +64,7 @@ export const commandGroups: CmdGroup[] = [
       { id: "copy-name", title: "Copy Name", keys: [["Shortcut", "C"]] },
       { id: "copy-hash", title: "Copy Info-Hash", keys: [["Shortcut", "Shift", "H"]] },
       { id: "copy-magnet", title: "Copy Magnet Link", keys: [["Shortcut", "Shift", "C"]] },
+      { id: "copy-updatable-link", title: "Copy Updatable Link", keys: [] },
     ],
   },
   {
@@ -68,6 +72,7 @@ export const commandGroups: CmdGroup[] = [
     commands: [
       { id: "transfers", title: "Show Transfers", keys: [["Esc"], ["Shortcut", "1"]] },
       { id: "search", title: "Search…", keys: [["Shortcut", "Shift", "F"], ["Shortcut", "2"]] },
+      { id: "search-clear", title: "Clear Search Results", keys: [["Esc"]] },
       { id: "rss", title: "RSS Feeds…", keys: [["Shortcut", "R"], ["Shortcut", "3"]] },
       { id: "view-next", title: "Next View", keys: [["Ctrl", "Tab"]] },
       { id: "view-previous", title: "Previous View", keys: [["Ctrl", "Shift", "Tab"]] },
@@ -79,6 +84,7 @@ export const commandGroups: CmdGroup[] = [
     commands: [
       { id: "palette", title: "Command Palette", keys: [["Alt", "X"]] },
       { id: "filter", title: "Filter, Run a Command or Add (Omnibox)", keys: [["Shortcut", "K"], ["Shortcut", "F"]] },
+      { id: "save-view", title: "Save Filter as View…", keys: [["Shortcut", "S"]] },
       { id: "focus-sidebar", title: "Focus Sidebar", keys: [["Shortcut", "B"]] },
       { id: "show-all", title: "Show: All", keys: [] },
       { id: "toggle-sidebar", title: "Toggle Sidebar", keys: [["Shortcut", "Shift", "B"]] },

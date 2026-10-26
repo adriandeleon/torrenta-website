@@ -16,4 +16,6 @@ summary: "Hybrid, v1 or v2, an automatic piece size, private, trackers by tier, 
 
 Create… asks where to save the `.torrent`, then hashes on a worker with a progress bar and a Cancel and writes the file whole. The result shows the v1 and v2 info-hashes and the magnet link, each with a Copy button. With "Start seeding after creation" the torrent is in the list at once, trusted as complete and seeded from where the files are.
 
+**Publish as updatable** makes the torrent an [updatable one](/features/updatable-torrents) (BEP 46): a key under a name you choose, the torrent seeded and put in the DHT, and a link others follow. **Torrent → New Version…** on it creates the next version under the same key.
+
 The pieces are hashed in Java, bit for bit what libtorrent would produce, and tested against libtorrent's own hasher.
