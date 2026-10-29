@@ -93,6 +93,7 @@ export const commandGroups: CmdGroup[] = [
       { id: "detail-side", title: "Move Details Pane Between Bottom and Right", keys: [] },
       { id: "toggle-toolbar", title: "Toggle Toolbar", keys: [] },
       { id: "toggle-density", title: "Toggle Row Density (Comfortable / Compact)", keys: [] },
+      { id: "toggle-simple", title: "Toggle Simple Mode", keys: [] },
     ],
   },
   {
@@ -102,6 +103,7 @@ export const commandGroups: CmdGroup[] = [
       { id: "message-log", title: "Messages", keys: [["Shortcut", "Shift", "M"]] },
       { id: "statistics", title: "Statistics", keys: [["Shortcut", "Shift", "T"]] },
       { id: "debug-log", title: "Debug Log", keys: [] },
+      { id: "report-problem", title: "Report a Problem…", keys: [] },
     ],
   },
   {

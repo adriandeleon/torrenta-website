@@ -4,10 +4,10 @@
 export type NewsItem = { title: string; detail: string };
 
 export const whatsNew: NewsItem[] = [
-  { title: "Torrenta 0.3.0", detail: "Out for Linux (x64), macOS (Apple Silicon) and Windows (x64), each installer with its own Java runtime." },
-  { title: "Sonarr, Radarr and a phone", detail: "Remote access speaks qBittorrent's web API, signed in always, and serves a web UI such as VueTorrent; <code>torrenta-nox</code> runs it all without a window." },
-  { title: "Bring your torrents over", detail: "File → Import from another client… takes qBittorrent's, Transmission's and Deluge's torrents at their progress, without a check." },
-  { title: "Look before you add", detail: "The Add dialog flags a <code>Film.mkv.exe</code>, says whether the swarm is healthy, and links files you already have instead of downloading them." },
-  { title: "Keys for many at once", detail: "Saved views, <code>&gt;set-category Films</code> over every match, Ctrl+Z for the last ten actions, and shortcuts you can change." },
-  { title: "Protocol extras", detail: "Play a file while it downloads, follow or publish updatable torrents (BEP 46), slow down on battery, and a leak check for a VPN." },
+  { title: "Torrenta 0.4.1", detail: "Out for Linux (x64), macOS (Apple Silicon) and Windows (x64). It fixes 0.4.0 downloading finished torrents again after a restart, and repairs the ones it caught." },
+  { title: "Simple mode", detail: "View → Simple Mode leaves the list, the ways a torrent arrives and the actions someone new needs; turning it off brings everything back as it was." },
+  { title: "Report a Problem", detail: "Help → Report a Problem… writes a GitHub issue from the debug log, with paths, names, hashes and addresses taken out first. Torrenta sends nothing itself." },
+  { title: "Tags at hand", detail: "The Add dialog shows a chip for every tag you have and suggests them as you type." },
+  { title: "Thousands of torrents", detail: "The list sorts once a second, the detail pane keeps up with 50,000 files, and a 300,000-line blocklist parses in about 70 ms." },
+  { title: "Calmer logs", detail: "A repeated warning is counted instead of written 28,000 times, and the last session's log survives a crash for the report." },
 ];

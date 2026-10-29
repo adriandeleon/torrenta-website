@@ -56,7 +56,11 @@ On the right:
   of both folders.
 - **Category.** A category with a save path fills the folder when you choose it.
 - **Stop when**: Never, Metadata arrives, or Files are checked.
-- **Tags**, comma-separated. A new tag is created as you type it.
+- **Tags**, comma-separated. A new tag is created as you type it. Under the field, a chip for
+  each tag you already have is lit while the tag is in the field; a press adds or removes it.
+  Typing suggests the tags that match the one at the caret, those that start with it first:
+  `Down` and `Up` move, `Enter` or `Tab` takes one, and `Esc` closes the list rather than the
+  dialog. `Down` on an empty tag lists them all.
 - **Content layout**: as the torrent has it, in a folder of its own, or without its root folder.
   The default is in **Settings → Adding torrents**.
 - **Options**: Sequential download, First and last pieces first (so a video plays and seeks

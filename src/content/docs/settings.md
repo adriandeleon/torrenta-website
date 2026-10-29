@@ -37,6 +37,8 @@ The settings file, `settings.properties`, can also be edited by hand.
 - **Colour rows by state**: on by default; off leaves the glyphs and sentences in monochrome.
 - **Sidebar**: Left, Right or Hidden.
 - **Details pane**: Bottom, Right or Collapsed.
+- **Simple mode**: off by default. Leaves the list and the everyday actions; see
+  [The transfer list](/docs/transfer-list#simple-mode).
 - **Merge the menu bar into the title bar**: off by default and experimental. The window is drawn
   without a system title bar, with the menus, the title and the window buttons on one row. The
   platform keeps its own buttons, drag, double-click and edge resize. It applies on restart, and
@@ -111,17 +113,27 @@ asks now; **Skip Version** keeps one release quiet.
 
 **Settings → General → Diagnostics → Show debug log** (also **View → Debug Log**) shows every
 warning and error logged this session and every uncaught exception, with Copy. The same lines go
-to `torrenta-session.log` in the config folder, started afresh each run.
+to `torrenta-session.log` in the config folder, started afresh each run; the last run's is kept as
+`torrenta-session.prev.log`, so a crash's record survives the next launch. A line that repeats is
+written three times, then once at 10, 100, 1,000… copies with the count, and the file starts again
+past 4 MiB.
+
+**Help → Report a Problem…** (also a button in the Debug Log window) turns both logs into a bug
+report with home-folder paths, names, hashes and addresses taken out. See
+[the FAQ](/docs/faq#how-do-i-report-a-bug).
 
 ## Settings sync
 
 **Settings → Sync** keeps the settings file the same on every computer through a Git repository
 of yours, such as a private one on GitHub. There is no Torrenta account or server.
 
-1. Paste the repository's URL and check the branch. With the GitHub CLI (`gh`) installed and
-   signed in, **Create on GitHub…** makes a private repository for you.
-2. Turn on **Keep settings in sync**. If the repository already holds settings, Torrenta says how
-   many would come to this machine and asks before connecting.
+1. Turn on **Keep settings in sync**. Until it is on, the rest of the page is disabled; with no
+   URL yet, the cursor goes to the URL field.
+2. Paste the repository's URL and check the branch; `Enter` (or leaving the field) connects. With
+   the GitHub CLI (`gh`) installed and signed in, **Create on GitHub…** (offered while no
+   repository is named) makes a private repository and connects it at once. If the repository
+   already holds settings, Torrenta says how many would come to this machine and asks before
+   connecting. A failed connect leaves the switch on and says why.
 
 Settings are merged one key at a time. A key changed on both sides keeps this machine's value,
 and the report says so. Sync runs after startup, half a minute after a change, and every few
