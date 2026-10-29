@@ -144,6 +144,27 @@ The sidebar sits on the left or the right, or is hidden: **View → Sidebar on t
 palette's **Move Sidebar to the Other Side**, or **Settings → General → Appearance → Sidebar**.
 The choices, the folded sections, the width and whether it shows are remembered.
 
+## Simple mode
+
+**View → Simple Mode** (also the toolbar's switch beside Settings, **Settings → General**, or
+`torrenta --simple` for one session) leaves only what someone new to torrents needs:
+
+- **Kept**: the list; every way a torrent arrives (a file, a magnet, the clipboard, a drop);
+  pause and resume, remove, choose files, open the folder, copy the magnet; and the diagnosis
+  card's remedies.
+- **Put away**: the sidebar, the Search and RSS views, the rarer commands (in the menus, the
+  right-click menu, the toolbar, the palette and on their shortcuts), the status bar's port and
+  DHT, the detail pane's Peers, Trackers, Log and Speed tabs, and the Add dialog's category,
+  tags, stop condition, layout and options.
+
+The list shows comfortable rows, whatever the saved density, with the name (its progress bar and
+status sentence inside), the size, the two rates and the time left. Every other column is still
+in the column menu; columns moved or shown in Simple mode are remembered for it alone.
+
+Nothing is changed by the mode. The sidebar keeps its place and its choice (which stops narrowing
+the list while it is hidden), the detail pane its tab, and turning the mode off brings each back
+as it was. RSS rules, watch folders and automation keep running.
+
 ## The view strip
 
 Transfers, Search and RSS share the centre of the window. A thin strip above it names the three,

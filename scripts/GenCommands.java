@@ -57,8 +57,9 @@ static LinkedHashMap<String, List<String>> groups() {
                     "toggle-detail",
                     "detail-side",
                     "toggle-toolbar",
-                    "toggle-density"));
-    GROUPS.put("Logs and statistics", List.of("event-log", "message-log", "statistics", "debug-log"));
+                    "toggle-density",
+                    "toggle-simple"));
+    GROUPS.put("Logs and statistics", List.of("event-log", "message-log", "statistics", "debug-log", "report-problem"));
     GROUPS.put(
             "Application",
             List.of("settings", "alt-speed", "switch-profile", "retry-engine", "check-updates", "about", "quit"));
@@ -97,7 +98,9 @@ void main(String[] args) throws IOException {
 
     String source = Files.readString(window);
     int start = source.indexOf("private List<Command> buildCommands()");
+    // 0.4.0 passes each command through Simple mode's gate on the way out.
     int end = source.indexOf("return List.copyOf(all);", start);
+    if (end < 0) end = source.indexOf("return all.stream()", start);
     if (start < 0 || end < 0) throw new IllegalStateException("buildCommands() not found in " + window);
     String body = source.substring(start, end);
 

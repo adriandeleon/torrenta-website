@@ -103,12 +103,25 @@ info-hashes.
 
 ## How do I report a bug?
 
-Open an issue at [github.com/adriandeleon/torrenta/issues](https://github.com/adriandeleon/torrenta/issues).
-Include what you did and what happened, the details from **Help → About** (**Copy details**
-gives the build, engine, Java, JavaFX, OS and config folder), and the log: **View → Debug Log**
-(also **Settings → General → Diagnostics**) shows this session's warnings, errors and uncaught
-exceptions with Copy. The same lines are in `torrenta-session.log` in the config folder, which a
-crash leaves behind.
+**Help → Report a Problem…** (also a button in the **View → Debug Log** window) writes the report
+for you: this session's and the last session's logs, with the version, engine, Java and OS. Home-
+folder paths, your user name, the torrents' names, magnet links, info-hashes, tracker passkeys,
+public peer addresses, e-mail addresses and tokens are taken out first. Read and edit it, then
+**Open GitHub Issue** opens a new issue at
+[github.com/adriandeleon/torrenta/issues](https://github.com/adriandeleon/torrenta/issues) with it
+filled in (when it is too long for the link, it is copied for you to paste). **Copy** and
+**Save…** are there too. Add what you did and what happened.
+
+If Torrenta will not start, `torrenta --report` writes the same report to the current folder and
+opens the issue. Torrenta sends nothing itself: the issue is filed by you, in your browser.
+
+## After a restart, finished torrents started downloading again. Are my files gone?
+
+No. With the `.part` suffix on, 0.3.0 and 0.4.0 could bring a finished torrent with a folder of
+its own back at 0 % after a restart and download it again into new `.part` files, beside the
+complete files, which were never touched. [0.4.1](/news/2026-10-28-torrenta-0-4-1-released)
+fixes it: at its first start each torrent caught is found complete and checked, and **View →
+Debug Log** names the leftover `.part` files to delete.
 
 ## Is it legal to use?
 
