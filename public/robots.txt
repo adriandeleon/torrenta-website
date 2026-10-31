@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adriandeleon.github.io/torrenta-website/sitemap-index.xml
+Sitemap: https://torrenta-project.dev/sitemap-index.xml
