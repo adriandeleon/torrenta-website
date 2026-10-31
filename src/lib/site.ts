@@ -1,9 +1,9 @@
-// Where the site is served. Until torrenta-project.dev is bought it is GitHub Pages' project
-// address, https://adriandeleon.github.io/torrenta-website/, so every page lives under `base`.
-// Moving to the domain: set `site` to it, `base` to "/", put the host in public/CNAME and in
-// public/robots.txt, and set the custom domain under the repository's Settings → Pages.
-export const site = "https://adriandeleon.github.io";
-export const base = "/torrenta-website";
+// Where the site is served: the apex domain torrenta-project.dev (www. redirects to it), at the
+// root, so `base` is "/". The host is also in public/CNAME, public/robots.txt and the social
+// cards (scripts/gen-images.mjs), and set as the custom domain under the repository's
+// Settings → Pages. Keep href() and `base`: moving again changes this file, not the templates.
+export const site = "https://torrenta-project.dev";
+export const base = "/";
 
 /**
  * A root-relative path ("/docs/search", "/#features", "og/docs.png") as it is served under
